@@ -543,7 +543,7 @@ class PortAddonPullRequest(Output):
             else:
                 body = body2
         return {
-            "draft": True,
+            "draft": False,
             "title": title,
             "head": f"{self.app.destination.org}:{self.app.destination.branch}",
             "base": self.app.to_branch.name,
@@ -568,11 +568,11 @@ class PortAddonPullRequest(Output):
             self._print(
                 "PR(s) ported locally:",
                 ", ".join(
-                    [f"{bc.OKCYAN}#{pr.number}{bc.ENDC}" for pr in processed_prs]
+                    [f"{bc.OKCYAN}#{pr}{bc.ENDC}" for pr in processed_prs]
                 ),
             )
         if click.confirm(
-            f"Create a draft PR from '{bc.BOLD}{self.app.destination.branch}{bc.END}' "
+            f"Create a PR from '{bc.BOLD}{self.app.destination.branch}{bc.END}' "
             f"to '{bc.BOLD}{self.app.to_branch.name}{bc.END}' "
             f"against {bc.BOLD}{self.app.upstream_org}/{self.app.repo_name}{bc.END}?"
         ):

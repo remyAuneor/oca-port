@@ -295,14 +295,7 @@ class PullRequest(abc.Hashable):
 
 def run_pre_commit(repo, addon, commit=True, hook=None):
     # Run pre-commit
-    print(f"\tRun {bc.BOLD}pre-commit{bc.END} and commit changes if any...")
-    # First ensure that 'pre-commit' is initialized for the repository,
-    # then run it (without checking the return code on purpose)
-    subprocess.check_call("pre-commit install", shell=True)
-    if hook:
-        subprocess.run(f"pre-commit run {hook}", shell=True)
-    else:
-        subprocess.run("pre-commit run -a", shell=True)
+    print(f"\tCommit changes if any...")
     if repo.untracked_files or repo.is_dirty():
         repo.git.add("-A")
         if commit:
